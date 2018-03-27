@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/reading-item/create', 'ReadingItemController@create');
+Route::post('/reading-items/create', 'ReadingItemController@create');
