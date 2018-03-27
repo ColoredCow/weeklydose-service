@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReadingItem;
 use Illuminate\Http\Request;
 
 class ReadingItemController extends Controller
@@ -13,7 +14,9 @@ class ReadingItemController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('reading-items.index')->with([
+            'reading_items' => ReadingItem::all()->sortByDesc('created_at'),
+        ]);
     }
 
     /**
@@ -34,7 +37,12 @@ class ReadingItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ReadingItem::create([
+            'topic' => $request->input('topic'),
+            'url' => $request->input('url'),
+            'recommended_by' => $request->input('recommended_by'),
+        ]);
+        return json_encode(['success' => true]);
     }
 
     /**
