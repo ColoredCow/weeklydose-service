@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ReadingItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ReadingItemController extends Controller
 {
@@ -37,12 +38,22 @@ class ReadingItemController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'description' => 'required',
+            'url' => 'required',
+            'recommended_by' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->success(false);
+        }
+
         ReadingItem::create([
             'description' => $request->input('description'),
             'url' => $request->input('url'),
             'recommended_by' => $request->input('recommended_by'),
         ]);
-        return json_encode(['success' => true]);
+        return response()->success(true);
     }
 
     /**
