@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReadingItem extends Model
 {
-    protected $fillable = ['topic', 'url', 'recommended_by'];
+    protected $fillable = ['description', 'url', 'recommended_by'];
 }

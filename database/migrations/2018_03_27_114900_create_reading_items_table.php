@@ -15,7 +15,7 @@ class CreateReadingItemsTable extends Migration
     {
         Schema::create('reading_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('topic');
+            $table->text('description');
             $table->string('url');
             $table->string('recommended_by');
             $table->timestamps();

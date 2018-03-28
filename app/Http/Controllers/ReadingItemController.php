@@ -38,7 +38,7 @@ class ReadingItemController extends Controller
     public function store(Request $request)
     {
         ReadingItem::create([
-            'topic' => $request->input('topic'),
+            'description' => $request->input('description'),
             'url' => $request->input('url'),
             'recommended_by' => $request->input('recommended_by'),
         ]);
