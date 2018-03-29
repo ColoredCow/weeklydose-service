@@ -45,17 +45,9 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function redirectToProvider($provider)
+    public function redirectToProvider()
     {
-        switch ($provider) {
-            case 'google':
-                return Socialite::driver($provider)->with(['hd' => env('GOOGLE_CLIENT_HD')])->redirect();
-                break;
-
-            default:
-                return Socialite::driver($provider)->redirect();
-                break;
-        }
+        return Socialite::driver('google')->with(['hd' => env('GOOGLE_CLIENT_HD')])->redirect();
     }
 
     /**
@@ -66,10 +58,10 @@ class LoginController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback()
     {
-        $user = Socialite::driver($provider)->user();
-        $authUser = $this->findOrCreateUser($user, $provider);
+        $user = Socialite::driver('google')->user();
+        $authUser = $this->findOrCreateUser($user, 'google');
         Auth::login($authUser, true);
         return redirect($this->redirectTo);
     }
