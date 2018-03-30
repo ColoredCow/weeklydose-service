@@ -16,5 +16,10 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::redirect('/login', '/auth/google');
+Route::get('logout', 'Auth\LoginController@logout');
+
+Route::get('auth/google', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/google/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::middleware('auth')->resource('reading-items', 'ReadingItemController');
